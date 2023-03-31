@@ -1,10 +1,14 @@
+from django.conf import settings
 from django.db.models import Q
+from django.http import HttpResponseRedirect
+from django.urls import reverse
 from django.views.generic import ListView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
 
 from .models import Category, Rooms, Area, Product
 from .serializers import ProductSerializer
+from django.utils.translation import activate
 
 
 class ProductListView(ListView):
@@ -98,3 +102,14 @@ class ProductFilterAPIView(ListAPIView):
         serializer = self.get_serializer(queryset, many=True)
         return Response(serializer.data)
 
+
+def set_language(request):
+    if request.method == 'POST':
+        language_code = request.POST.get('language')
+        if language_code:
+            activate(language_code)
+            response = HttpResponseRedirect(reverse('home'))
+            response.set_cookie(settings.LANGUAGE_COOKIE_NAME, language_code)
+            return response
+
+    return HttpResponseRedirect(reverse('home'))

@@ -1,5 +1,6 @@
 import os.path
 from pathlib import Path
+from django.utils.translation import gettext_lazy as _
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -12,12 +13,14 @@ SECRET_KEY = 'django-insecure-7)k1tf0$f95rs$$5x+022@t0o*&&nm@&fdbc6sy=sy7n-eo944
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
+TEMPLATE_DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["*"]
 
 # Application definition
 
 INSTALLED_APPS = [
+    'modeltranslation',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
@@ -28,17 +31,11 @@ INSTALLED_APPS = [
     'ilan.apps.IlanConfig',
     'rest_framework',
 ]
-
-MIDDLEWARE = [
-    'django.middleware.security.SecurityMiddleware',
-    'django.contrib.sessions.middleware.SessionMiddleware',
-    'django.middleware.common.CommonMiddleware',
-    'django.middleware.csrf.CsrfViewMiddleware',
-    'django.contrib.auth.middleware.AuthenticationMiddleware',
-    'django.contrib.messages.middleware.MessageMiddleware',
-    'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    'django.middleware.locale.LocaleMiddleware',
-]
+MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
+              'django.middleware.locale.LocaleMiddleware', 'django.middleware.common.CommonMiddleware',
+              'django.middleware.csrf.CsrfViewMiddleware', 'django.contrib.auth.middleware.AuthenticationMiddleware',
+              'django.contrib.messages.middleware.MessageMiddleware',
+              'django.middleware.clickjacking.XFrameOptionsMiddleware', ]
 
 ROOT_URLCONF = 'TestTask.urls'
 
@@ -57,6 +54,8 @@ TEMPLATES = [
                 'home.context_processor.get_all_categories',
                 'home.context_processor.get_all_rooms',
                 'home.context_processor.get_all_areas',
+                'config_site.context_processor.get_title',
+                'config_site.context_processor.get_subtitle',
             ],
         },
     },
@@ -103,15 +102,22 @@ USE_I18N = True
 
 USE_TZ = True
 
+LANGUAGES = (
+    ('ru', _('Russian')),
+    ('en', _('English')),
+    ('tr', _('Turkish')),
+    ('ar', _('Arabic')),
+    ('de', _('German')),
+)
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
 # STATIC_ROOT = os.path.join(BASE_DIR, 'static')
 STATICFILES_DIRS = [
-     os.path.join(BASE_DIR, 'static')
+    os.path.join(BASE_DIR, 'static')
 ]
-
 
 MEDIA_URL = 'media/'
 MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
@@ -120,3 +126,7 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 # https://docs.djangoproject.com/en/4.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]

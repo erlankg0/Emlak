@@ -1,5 +1,5 @@
 {% load static %}
-
+{% load i18n %}
 <!DOCTYPE html>
 <html lang="ru">
 
@@ -38,16 +38,22 @@
                         </ul>
                     </nav>
                     <div class="options">
-                        <div class="language">
-                            <img src="{% static 'img/ru.svg' %}" alt="ru">
-                            <label for="language"></label>
-                            <select id="language">
-                                <option value="en">English</option>
-                                <option value="es">Español</option>
-                                <option value="fr">Français</option>
+                        <img src="{% static 'img/ru.svg' %}" alt="ru">
+                        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }} ({{ language.code }})
+                                    </option>
+                                {% endfor %}
                             </select>
-                        </div>
-
+                            <input type="submit" value="Go" hidden>
+                        </form>
                     </div>
                     <label><input type="checkbox" class="theme"><span class="forTheme"></span>
                     </label>
@@ -64,8 +70,8 @@
         <div class="container">
             <div class="intro__inner">
                 <div class="intro__content">
-                    <h1 class="intro__title">Недвижимость в Турции</h1>
-                    <p class="intro__subtitle">Квартиры в Алтынташ: ваш идеальный вариант для жизни и отдыха</p>
+                    <h1 class="intro__title">{{ title }}</h1>
+                    <p class="intro__subtitle">{{ subtitle}}</p>
                 </div> <!-- /.intro__content -->
                 <div class="intro__contacts">
                     <a href="https://t.me/username" target="_blank" class="intro__btn">Связаться с нами</a>
@@ -127,11 +133,10 @@
 <script type="text/javascript" src="{% static 'js/script.js' %}"></script>
 <script type="text/javascript" src="{% static 'js/filter.js' %}"></script>
 <script>
-    const languageSelect = document.getElementById("language");
-
-    languageSelect.addEventListener("change", function () {
-
-        window.location.href = window.location.href + "?lang=" + this.value;
+    const select = document.querySelector('select[name="language"]');
+    const form = select.closest('form');
+    select.addEventListener('change', () => {
+        form.querySelector('input[type="submit"]').click();
     });
 </script>
 

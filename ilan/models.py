@@ -100,6 +100,7 @@ class Product(models.Model):
         verbose_name = 'Объявления'
         verbose_name_plural = 'Объявлении'
 
+
 class Image(models.Model):
     image = models.ImageField(
         verbose_name='Изображение',

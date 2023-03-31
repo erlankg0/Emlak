@@ -1,5 +1,6 @@
 from django.contrib import admin
 from ilan.models import Product, Image
+from modeltranslation.admin import TranslationAdmin
 
 
 class ProductImages(admin.StackedInline):
@@ -8,5 +9,5 @@ class ProductImages(admin.StackedInline):
 
 
 @admin.register(Product)
-class ProductAdmin(admin.ModelAdmin):
+class ProductAdmin(TranslationAdmin):
     inlines = [ProductImages]

@@ -128,26 +128,3 @@ function loadProducts(params) {
 const videoUrl = '/static/video/main.mp4';
 const cacheName = 'my-video-cache';
 
-// Проверяем, есть ли файл в кэше
-if ('caches' in window) {
-    caches.match(videoUrl).then(function (response) {
-        if (response) {
-            // Используем файл из кэша
-            const video = document.querySelector('video');
-            video.src = URL.createObjectURL(response);
-        } else {
-            // Загружаем файл с сервера и сохраняем его в кэше
-            fetch(videoUrl).then(function (response) {
-                caches.open(cacheName).then(function (cache) {
-                    cache.put(videoUrl, response.clone());
-                });
-                const video = document.querySelector('video');
-                video.src = URL.createObjectURL(response);
-            });
-        }
-    });
-} else {
-    // Кэширование не поддерживается, загружаем файл с сервера
-    const video = document.querySelector('video');
-    video.src = videoUrl;
-}

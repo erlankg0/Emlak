@@ -1,6 +1,7 @@
 from django.conf import settings
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponseRedirect
 from django.shortcuts import get_object_or_404
+from django.utils.translation import activate
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
 from django.views.generic import ListView
@@ -76,3 +77,11 @@ def products(request):
 def serve_video(request):
     response = serve(request, 'video/main.mp4', document_root=settings.STATIC_ROOT)
     response['Cache-Control'] = 'max-age=86400'  # кэшировать
+
+
+def set_language(request):
+    if request.method == 'POST':
+        language_code = request.POST.get('language')
+        if language_code:
+            activate(language_code)
+    return HttpResponseRedirect(request.META.get('HTTP_REFERER', '/'))

@@ -1,19 +1,20 @@
 from django.contrib import admin
 from home.models import Category, Area, Rooms, Ip
+from modeltranslation.admin import TranslationAdmin
 
 
 @admin.register(Category)
-class CategoryAdmin(admin.ModelAdmin):
+class CategoryAdmin(TranslationAdmin):
     pass
 
 
 @admin.register(Area)
-class AreaAdmin(admin.ModelAdmin):
+class AreaAdmin(TranslationAdmin):
     pass
 
 
 @admin.register(Rooms)
-class RoomsAdmin(admin.ModelAdmin):
+class RoomsAdmin(TranslationAdmin):
     pass
 
 
