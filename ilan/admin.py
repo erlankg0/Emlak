@@ -1,6 +1,7 @@
 from django.contrib import admin
-from ilan.models import Product, Image
 from modeltranslation.admin import TranslationAdmin
+
+from ilan.models import Product, Image
 
 
 class ProductImages(admin.StackedInline):
@@ -11,3 +12,4 @@ class ProductImages(admin.StackedInline):
 @admin.register(Product)
 class ProductAdmin(TranslationAdmin):
     inlines = [ProductImages]
+    prepopulated_fields = {"slug": ("title",)}

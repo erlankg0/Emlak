@@ -12,9 +12,8 @@ class Product(models.Model):
     description = models.TextField(
         verbose_name="Описание объявления"
     )
-    price = models.CharField(
+    price = models.IntegerField(
         verbose_name="Цена",
-        max_length=20,
         help_text='Максимум 20 символов'
     )
     category = models.ForeignKey(

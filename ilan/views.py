@@ -95,6 +95,13 @@ class ProductFilterAPIView(ListAPIView):
         elif max_price:
             queryset = queryset.filter(price__lte=max_price)
 
+        id = self.request.GET.get('id')
+        if id:
+            try:
+                queryset = queryset.filter(pk=id)
+            except Product.DoesNotExist:
+                pass
+
         return queryset
 
     def get(self, request, *args, **kwargs):

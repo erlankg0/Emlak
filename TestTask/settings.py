@@ -29,7 +29,10 @@ INSTALLED_APPS = [
     'django.contrib.staticfiles',
     'home.apps.HomeConfig',
     'ilan.apps.IlanConfig',
+    'config_site.apps.ConfigSiteConfig',
+    'callback.apps.CallbackConfig',
     'rest_framework',
+
 ]
 MIDDLEWARE = ['django.middleware.security.SecurityMiddleware', 'django.contrib.sessions.middleware.SessionMiddleware',
               'django.middleware.locale.LocaleMiddleware', 'django.middleware.common.CommonMiddleware',
@@ -110,6 +113,10 @@ LANGUAGES = (
     ('de', _('German')),
 )
 
+LOCALE_PATHS = [
+    BASE_DIR / 'locale',
+]
+
 # Static files (CSS, JavaScript, Images)
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
@@ -127,6 +134,3 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOCALE_PATHS = [
-    BASE_DIR / 'locale',
-]

@@ -50,17 +50,17 @@ class SubTitle(models.Model):
 
     # singelton pattern
     def save(self, *args, **kwargs):
-        if Title.objects.exists() and not self.pk:
-            raise ValidationError('Заголовок уже существует, Удалите старый создайте новый')
+        if SubTitle.objects.exists() and not self.pk:
+            raise ValidationError('Подзаголовок уже существует, Удалите старый создайте новый')
         return super().save(*args, **kwargs)
 
     def __str__(self):
         return self.name
 
     class Meta:
-        verbose_name = 'Заголовок'
-        verbose_name_plural = 'Заголовки'
-        db_table = 'title'
+        verbose_name = 'Подзаголовок'
+        verbose_name_plural = 'Подзаголовки'
+        db_table = 'subtitle'
 
 
 class Favicon(models.Model):

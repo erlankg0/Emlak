@@ -1,5 +1,6 @@
 {% extends 'base.html' %}
 {% load static %}
+{% load i18n %}
 {% block content %}
     <div class="sale" id="sale">
         <div class="container">
@@ -46,30 +47,30 @@
                         <div class="description_product">
                             <div class="description_list">
                                 <div class="item-list">
-                                    <div class="title-list">Квартиры с концепцией отеля</div>
+                                    <div class="title-list">{{ product.title }}</div>
                                 </div>
                                 <div class="item-list">
                                     <div class="price-item">
                                         <ul>
                                             <li>
-                                                Цена
+                                                {% trans 'Цена' %}
                                             </li>
-                                            <li>от {{ product.price }} USD</li>
+                                            <li>{% trans 'от' %} {{ product.price }} USD</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="square-item">
                                         <ul>
-                                            <li>Площадь</li>
-                                            <li>{{ product.square }} кв.м</li>
+                                            <li>{% trans 'Площадь' %}</li>
+                                            <li>{{ product.square }} {% trans 'кв.м' %}</li>
                                         </ul>
                                     </div>
                                 </div>
                                 <div class="item-list">
                                     <div class="rooms-list">
                                         <ul>
-                                            <li>Комнаты</li>
+                                            <li>{% trans 'Комнаты' %}</li>
                                             <li>
                                                 <ul>
                                                     {% for room in product.rooms.all %}
@@ -82,7 +83,7 @@
                                 </div>
                             </div>
                         </div>
-                        <a href="#" class="btn-more">Подробнее</a>
+                        <a href="#" class="btn-more">{% trans 'Подробнее' %}</a>
                     </div>
                 {% endfor %}
             </div>
@@ -90,7 +91,7 @@
         <div style="display: flex;justify-content: center; align-items: center; visibility: hidden;">
             <div class="more">
                 <button type="button">
-                    Показать еще
+                    {% trans 'Показать еще' %}
                 </button>
             </div>
         </div>

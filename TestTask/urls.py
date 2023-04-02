@@ -12,6 +12,7 @@ urlpatterns = [
 urlpatterns += i18n_patterns(
     path('', include('home.urls')),
     path('ilan/', include('ilan.urls')),
+    path('callback/', include('callback.urls')),
     path('set-language/', set_language, name='set_language'),
 
 )

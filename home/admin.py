@@ -5,7 +5,8 @@ from modeltranslation.admin import TranslationAdmin
 
 @admin.register(Category)
 class CategoryAdmin(TranslationAdmin):
-    pass
+    model = Category
+    translation_fields = ('title',)
 
 
 @admin.register(Area)
