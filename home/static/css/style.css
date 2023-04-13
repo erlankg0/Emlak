@@ -365,6 +365,9 @@ option {
 .intro {
     display: flex;
     justify-content: center;
+    background-image: url("/static/img/main.jpg");
+    background-repeat: no-repeat;
+    background-position: center;
 }
 
 .intro__inner {

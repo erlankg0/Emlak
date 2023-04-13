@@ -48,7 +48,7 @@ if (savedTheme === 'dark') {
 
 
 function addLike(postId) {
-    $.post('/add_like/' + postId + '/', function (data) {
+    $.post('/ru/add_like/' + postId + '/', function (data) {
         if (data.status === 'ok') {
             alert('Post liked!');
         } else {
@@ -58,7 +58,7 @@ function addLike(postId) {
 }
 
 function addDislike(postId) {
-    $.post('/add_dislike/' + postId + '/', function (data) {
+    $.post('/ru/add_dislike/' + postId + '/', function (data) {
         if (data.status === 'ok') {
             alert('Post disliked!');
         } else {
@@ -68,86 +68,11 @@ function addDislike(postId) {
 }
 
 function addFavorite(postId) {
-    $.post('/add_favorite/' + postId + '/', function (data) {
+    $.post('/ru/add_favorite/' + postId + '/', function (data) {
         if (data.status === 'ok') {
             alert('Post added to favorites!');
         } else {
             alert(data.message);
         }
     });
-}
-
-// топ, новые, горяшие предложения
-
-/*$(document).ready(function () {
-    // Загрузка всех объявлений при загрузке страницы
-    loadProducts('');
-
-    // Обработка нажатий на кнопки
-    $('#top-offers').click(function () {
-        loadProducts({type: 'top'});
-    });
-    $('#new-offers').click(function () {
-        loadProducts({type: 'new'});
-    });
-    $('#hot-deals').click(function () {
-        loadProducts({type: 'hot'});
-    });
-});
-
-function loadProducts(params) {
-    // Отправка AJAX-запроса на сервер для получения списка объявлений с заданными параметрами
-    $.ajax({
-        url: '/api/products/',
-        type: 'GET',
-        data: params,
-        dataType: 'json',
-        success: function (response) {
-            // Обновление содержимого списка объявлений на странице
-            var productsList = $('#products-list');
-            productsList.empty(); // Очистка списка
-            for (var i = 0; i < response.products.length; i++) {
-                var product = response.products[i];
-                // Создание HTML-элемента для нового объявления
-                var productItem = $('<div class="product-item">' +
-                    '<h2>' + product.title + '</h2>' +
-                    '<p>' + product.description + '</p>' +
-                    '<p>Price: ' + product.price + '</p>' +
-                    '<p>Square: ' + product.square + '</p>' +
-                    '</div>');
-                productsList.append(productItem); // Добавление нового элемента в список
-            }
-        },
-        error: function (xhr, status, error) {
-            console.error(xhr.responseText);
-        }
-    });
-}
-*/
-
-const videoUrl = '/static/video/main.mp4';
-const cacheName = 'my-video-cache';
-
-// Проверяем, есть ли файл в кэше
-if ('caches' in window) {
-    caches.match(videoUrl).then(function (response) {
-        if (response) {
-            // Используем файл из кэша
-            const video = document.querySelector('video');
-            video.src = URL.createObjectURL(response);
-        } else {
-            // Загружаем файл с сервера и сохраняем его в кэше
-            fetch(videoUrl).then(function (response) {
-                caches.open(cacheName).then(function (cache) {
-                    cache.put(videoUrl, response.clone());
-                });
-                const video = document.querySelector('video');
-                video.src = URL.createObjectURL(response);
-            });
-        }
-    });
-} else {
-    // Кэширование не поддерживается, загружаем файл с сервера
-    const video = document.querySelector('video');
-    video.src = videoUrl;
 }

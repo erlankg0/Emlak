@@ -1,0 +1,50 @@
+{% load i18n %}
+{% load static %}
+<header>
+    <div class="headerTop">
+
+        <div class="headerTopElements">
+            <div class="navLeft">
+                <img src="{% static 'img/svg/logo__.svg' %}" alt="" class="logo">
+            </div>
+            <div class="navRight">
+                <ul class="pages">
+                    <li class="options"><a href="#">{% trans "Недвижимость" %}</a></li>
+                    <li class="options"><a href="#">{% trans "Контакты" %}</a></li>
+                    <li class="options"><a href="#">{% trans "Избранное" %}</a></li>
+                    <li class="options"><a href="#">{% trans "О портале" %}</a></li>
+                    <li class="options langOptions">
+                        <img src="{% static 'img/flags/ru.svg' %}" alt="ru" width="20px" id="flag">
+                        <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
+                            <input name="next" type="hidden" value="{{ redirect_to }}">
+                            <select name="language">
+                                {% get_current_language as LANGUAGE_CODE %}
+                                {% get_available_languages as LANGUAGES %}
+                                {% get_language_info_list for LANGUAGES as languages %}
+                                {% for language in languages %}
+                                    <option value="{{ language.code }}"{% if language.code == LANGUAGE_CODE %}
+                                            selected{% endif %}>
+                                        {{ language.name_local }}
+                                    </option>
+                                {% endfor %}
+                            </select>
+                            <input type="submit" value="Go" hidden>
+                        </form>
+                    <li class="options">
+                        <label><input type="checkbox" class="theme">
+                            <span class="forTheme"></span>
+                        </label></li>
+                </ul>
+            </div>
+        </div>
+        <div class="Burger"><span></span></div>
+    </div>
+    <div class="container">
+
+        <div class="headerMain">
+            <h2 class="MainText">{{ title }}</h2>
+            <h4 class="SomeText">{{ subtitle }}</h4>
+            <button class="contactWithUs">{% trans 'Связаться с нами' %}</button>
+        </div>
+    </div>
+</header>
