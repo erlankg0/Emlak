@@ -1,0 +1,64 @@
+{% extends 'base.html' %}
+{% load static i18n %}
+{% block intro %}
+
+{% endblock %}
+{% block content %}
+    <section class="sec1">
+        <div class="container">
+            <ul class="searchOptions">
+                <li class="searchOption"><input type="text" placeholder="Тип" class="search type"></li>
+                <li class="searchOption"><input type="text" placeholder="Комнат" class="search numberOfRooms"></li>
+                <li class="searchOption"><input type="text" placeholder="Расположение" class="search placement"></li>
+                <li class="searchOption"><input type="text" placeholder="Цена от" class="search costFrom"></li>
+                <li class="searchOption"><input type="text" placeholder="Цена до" class="search costTo"></li>
+                <li class="searchOption"><input type="text" placeholder="ID " class="search ID"></li>
+                <li class="searchOption"><input type="text" placeholder="Поиск  " class="search SearchMain"></li>
+            </ul>
+            <h1 class="sec1Title">♥ Избранное</h1>
+            <img src="./images/image%20226.png" alt="" class="sec1MainImg">
+            <p class="sec1OtherText">В избранном пусто <br>
+                Добавляйте понравившиеся проекты с помощью ❤️️</p>
+            <button class="showOthers">Посмотреть топ предложений</button>
+        </div>
+    </section>
+    <section class="sec2">
+        <div class="container">
+            <h2 class="mainSec2Text">Вы риелторское агентство?</h2>
+            <div class="sec2Buttons">
+                <button class="contactButton">WHATSAAPP</button>
+                <button class="contactButton">TELEGRAMM</button>
+            </div>
+        </div>
+    </section>
+    <section class="sec3">
+        <div class="container">
+            <div class="sec3main">
+                <div class="sec3Left">
+                    <div class="sec3MainText">
+                        <h1 class="acquire">Оставить свой запрос</h1>
+                        <h4 class="otherText">Как мы можем вам помочь?</h4>
+                    </div>
+                </div>
+
+                <div class="sec3Right">
+                    <input type="text" placeholder="Ваш e-mail" class="emailInp sec3Inp">
+                    <input type="text" placeholder="Ваш телефон" class="phoneInp sec3Inp">
+                    <input type="text" placeholder="Ваше имя" class="nameInp sec3Inp">
+                    <input type="text" placeholder="ID объекта" class="IDInp sec3Inp">
+                    <textarea class="sec3Textarea"></textarea>
+                    <div class="agreeingBlock">
+                        <input type="checkbox" class="agree">
+                        <h4 class="checkText">Нажимая “Отправить” Вы даете свое согласие на обработку <a href="#"
+                                                                                                         class="sec3Link">
+                            персональных данных</a></h4>
+                    </div>
+                    <button class="send">Отправить</button>
+                </div>
+            </div>
+        </div>
+    </section>
+{% endblock %}
+{% block extra_js %}
+
+{% endblock %}
