@@ -4,7 +4,7 @@ from django.shortcuts import get_object_or_404
 from django.utils.translation import activate
 from django.views.decorators.csrf import csrf_exempt
 from django.views.decorators.http import require_POST
-from django.views.generic import ListView
+from django.views.generic import ListView, TemplateView
 from django.views.static import serve
 
 from ilan.models import Like, Dislike, Ip, Favorite
@@ -17,12 +17,18 @@ class ProductListView(ListView):
     template_name = "ilan/index.html"
 
 
+class AboutView(TemplateView):
+    template_name = 'home/about.html'
+
+
 # chatgpt3
 @require_POST
 @csrf_exempt
 def add_like(request, post_id):
     product = get_object_or_404(Product, id=post_id)
     ip, created = Ip.objects.get_or_create(ip=request.META.get('REMOTE_ADDR'))
+    print(request.POST)
+    print("elam")
     if not product.has_liked(ip):
         like = Like(product=product, ip=ip)
         like.save()

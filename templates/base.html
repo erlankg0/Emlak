@@ -7,7 +7,11 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/next.css' %}">
     <link rel="stylesheet" href="{% static 'css/lightbox.css' %}">
+    {% block extra_css %}
+
+    {% endblock %}
     <!-- Basic stylesheet -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/assets/owl.carousel.min.css">
     <link rel="stylesheet"
@@ -16,192 +20,19 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/OwlCarousel2/2.3.4/owl.carousel.min.js"></script>
 
     <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.5.0/css/font-awesome.min.css" rel="stylesheet">
-
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@9/swiper-bundle.min.css"/>
     <title>Villa Kadri</title>
 </head>
 
 <body>
-<style>
-    header {
-        background-image: url("/static/img/main.jpg");
-        background-size: cover;
-        background-repeat: no-repeat;
-        background-position: center;
-        padding-bottom: 200px;
-        color: white;
-        height: 100vh;
-    }
-
-    .headerTop {
-
-        padding: 30px 100px 20px 100px;
-
-        background: rgba(0, 0, 0, 0.25);
-
-    }
-
-    .headerTopElements {
-        display: flex;
-        align-items: center;
-        justify-content: space-between;
-    }
-
-    .pages {
-        display: flex;
-        align-items: center;
-        gap: 20px;
-    }
-
-    .options {
-        list-style: none;
-        color: white;
-    }
-
-    a:not(.sec5Link) {
-        text-decoration: none;
-        color: white;
-        font-family: Montserrat;
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 22px;
-        letter-spacing: 0em;
-        text-align: left;
-
-    }
-
-    .langOptions {
-        display: flex;
-        align-items: center;
-        gap: 10px;
-    }
-
-    select option {
-        background: transparent;
-    }
-
-    .select:active {
-        border: none;
-    }
-
-    .select {
-        background: transparent;
-        color: white;
-        border: none;
-        font-family: Montserrat;
-        font-size: 18px;
-        font-weight: 700;
-        line-height: 22px;
-        letter-spacing: 0em;
-        text-align: left;
-
-    }
-
-
-    .headerMain {
-        padding-top: 200px;
-    }
-
-    .MainText {
-        margin-bottom: 30px;
-    }
-
-    .contactWithUs {
-        font-family: 'Montserrat';
-        font-style: normal;
-        font-weight: 700;
-        font-size: 18px;
-        line-height: 22px;
-        background: none;
-        color: white;
-        border: 1px solid white;
-        padding: 20px 40px;
-        border-radius: 5px;
-        margin-top: 40px;
-        cursor: pointer;
-    }
-
-</style>
-
 {% block header %}
     {% include 'include/header.html' %}
 {% endblock %}
 
 <main class="main">
-    <div class="section">
-        <div class="container">
-            <div class="form-row">
-                <select name="category">
-                    <option value="0">{% trans 'Тип' %}</option>
-                    {% for category in categories %}
-                        <option value="{{ category.pk }}">{{ category }}</option>
-                    {% endfor %}
-                </select>
-                <select name="room">
-                    <option value="0">{% trans 'Комнаты' %}</option>
-                    {% for room in rooms %}
-                        <option value="{{ room.pk }}">{{ room }}</option>
-                    {% endfor %}
-                </select>
-                <select name="geo">
-                    <option value="0">{% trans 'Район' %}</option>
-                    {% for area in areas %}
-                        <option value="{{ area.pk }}">{{ area }}</option>
-                    {% endfor %}
-                </select>
-                <input type="text" name="min" placeholder="{% trans 'Цена от' %}">
-                <input type="text" name="max" placeholder="{% trans 'Цена до' %}">
-                <input type="text" name="id" placeholder="ID">
-                <button type="submit" class="form-row_btn" id="search">{% trans 'Поиск' %}</button>
-
-            </div>
-        </div>
-        <div class="container">
-            <div class="button-container">
-                <a href="{% url 'top_products' %}" class="button-with-image" id="top-offers">
-                    <img src="{% static 'img/svg/Star 1.svg' %}" alt="Image 1" class="button-img">
-                    <span>{% trans 'Топ предложений' %}</span>
-                </a>
-                <a href="{% url 'new_products' %}" class="button-with-image" id="new-offers">
-                    <img src="{% static 'img/svg/Rectangle 34.svg' %}" alt="Image 2" class="button-img">
-                    <span>{% trans 'Новые предложения' %}</span>
-                </a>
-                <a href="{% url 'hot_products' %}" class="button-with-image" id="hot-deals">
-                    <img src="{% static 'img/svg/Group 87.svg' %}" alt="Image 3" class="button-img">
-                    <span>{% trans 'Горячие предложения' %}</span>
-                </a>
-            </div>
-        </div>
-    </div>
     {% block content %}
 
     {% endblock %}
-    <section class="sec5">
-        <div class="container">
-            <div class="sec5main">
-                <div class="sec5Left">
-                    <div class="sec5MainText">
-                        <h1 class="acquire">Оставить свой запрос</h1>
-                        <h4 class="otherText">Как мы можем вам помочь?</h4>
-                    </div>
-                </div>
-
-                <div class="sec5Right">
-                    <input type="text" placeholder="Ваш e-mail" class="emailInp sec5Inp">
-                    <input type="text" placeholder="Ваш телефон" class="phoneInp sec5Inp">
-                    <input type="text" placeholder="Ваше имя" class="nameInp sec5Inp">
-                    <input type="text" placeholder="ID объекта" class="IDInp sec5Inp">
-                    <textarea class="sec5Textarea" ></textarea>
-                    <div class="agreeingBlock">
-                        <input type="checkbox" class="agree">
-                        <h4 class="checkText">Нажимая “Отправить” Вы даете свое согласие на обработку <a href="#"
-                                                                                                         class="sec5Link">
-                            персональных данных</a></h4>
-                    </div>
-                    <button class="send">Отправить</button>
-                </div>
-            </div>
-        </div>
-    </section>
 </main>
 {% block footer %}
     {% include 'include/footer.html' %}
@@ -256,6 +87,9 @@
     });
 
 </script>
+{% block extra_js %}
+
+{% endblock %}
 
 
 </body>

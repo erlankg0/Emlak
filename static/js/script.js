@@ -76,3 +76,7 @@ function addFavorite(postId) {
         }
     });
 }
+
+function send_callback(email, phone, name, id, text) {
+    $.post('/ru/callback/')
+}

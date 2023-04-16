@@ -9,10 +9,10 @@
             </div>
             <div class="navRight">
                 <ul class="pages">
-                    <li class="options"><a href="#">{% trans "Недвижимость" %}</a></li>
+                    <li class="options"><a href="{% url 'home' %}">{% trans "Недвижимость" %}</a></li>
                     <li class="options"><a href="#">{% trans "Контакты" %}</a></li>
-                    <li class="options"><a href="#">{% trans "Избранное" %}</a></li>
-                    <li class="options"><a href="#">{% trans "О портале" %}</a></li>
+                    <li class="options"><a href="{% url 'favorite' %}">{% trans "Избранное" %}</a></li>
+                    <li class="options"><a href="{% url 'about' %}">{% trans "О портале" %}</a></li>
                     <li class="options langOptions">
                         <img src="{% static 'img/flags/ru.svg' %}" alt="ru" width="20px" id="flag">
                         <form action="{% url 'set_language' %}" method="post">{% csrf_token %}
@@ -40,7 +40,6 @@
         <div class="Burger"><span></span></div>
     </div>
     <div class="container">
-
         <div class="headerMain">
             <h2 class="MainText">{{ title }}</h2>
             <h4 class="SomeText">{{ subtitle }}</h4>

@@ -5,8 +5,8 @@ from django.urls import reverse
 from django.views.generic import ListView
 from rest_framework.generics import ListAPIView
 from rest_framework.response import Response
-
-from .models import Category, Rooms, Area, Product
+from callback.forms import CallBackForms
+from .models import Category, Rooms, Area, Product, Favorite
 from .serializers import ProductSerializer
 from django.utils.translation import activate
 
@@ -15,6 +15,17 @@ class ProductListView(ListView):
     model = Product
     context_object_name = "products"
     template_name = "ilan/index.html"
+
+    def get_context_data(self, *, object_list=None, **kwargs):
+        context = super().get_context_data(**kwargs)
+        context["form"] = CallBackForms()
+        return context
+
+
+class List(ListView):
+    model = Favorite
+    context_object_name = "products"
+    template_name = "ilan/favorite.html"
 
 
 class TopProductListView(ListView):

@@ -103,7 +103,7 @@ class Product(models.Model):
 class Image(models.Model):
     image = models.ImageField(
         verbose_name='Изображение',
-        help_text='Разрешение изображения должно быть 1920x1080',
+        help_text='Разрешение изображения должно быть 1920x1080 и выше',
     )
     product = models.ForeignKey(
         Product,
@@ -111,12 +111,36 @@ class Image(models.Model):
         related_name='images'
     )
 
+    def __str__(self):
+        return self.product
+
     class Meta:
         verbose_name = 'Изображение'
         verbose_name_plural = 'Изображения'
 
 
+class RoomsImage(models.Model):
+    image = models.ImageField(
+        verbose_name='Изображение комнат',
+        help_text='Разрешение изображения должно быть 1920x1080 и выше'
+    )
+    product = models.ForeignKey(
+        Product,
+        on_delete=models.PROTECT,
+        related_name='images_rooms'
+    )
+
+    def __str__(self):
+        return self.product
+
+    class Meta:
+        verbose_name = 'Изображение комнаты'
+        verbose_name_plural = 'Изображения комнат'
+
+
 # Модель Like
+
+
 class Like(models.Model):
     ip = models.ForeignKey(
         Ip,

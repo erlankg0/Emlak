@@ -69,3 +69,27 @@ class Ip(models.Model):
         verbose_name_plural = 'IP адреса'  # Имя модели во множественном числе
         db_table = 'ip'  # Имя таблицы
 
+
+class Infrastructure(models.Model):
+    title = models.CharField(
+        verbose_name="Название инфраструктуры"
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = "Инфраструктура"
+
+
+class Specificities(models.Model):
+    title = models.CharField(
+        verbose_name='Особенность квартиры'
+    )
+
+    def __str__(self):
+        return self.title
+
+    class Meta:
+        verbose_name = 'Особенность'
+        verbose_name_plural = 'Особенности'
